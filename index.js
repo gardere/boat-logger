@@ -21,7 +21,11 @@ const init = () => {
 
     // start a second timer to persist the logger module data
     setInterval(() => {
-        logger.persistData();
+        try {
+            logger.persistData();
+        } catch(error) {
+            console.error(`logger - could not persist data: ${(error || {}).toString()}`)
+        }
     }, configuration.PERSIST_DATA_FREQUENCY_MILLISECONDS);
 };
 
