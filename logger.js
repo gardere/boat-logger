@@ -15,11 +15,11 @@ module.exports = configuration => {
         const latestTimestamp = Math.max(...Object.keys(inMemoryData[readingKey]));
         const dataToPersist = inMemoryData;
         inMemoryData = {};
-        fs.writeFile(`data_${latestTimestamp}.json`, JSON.stringify(dataToPersist), 'utf8', ()=>{});
+        fs.writeFile(`logger-data/data_${latestTimestamp}.json`, JSON.stringify(dataToPersist), 'utf8', ()=>{});
     };
 
     const storeReadings = readings => {
-        const datetime = readings['position'].datetime;
+        const datetime = (readings['position'] || {datetime: 0}).datetime;
         if (datetime === 0) {
             console.log('no valid timestamp yet... let\'s wait for the gps to acquire some data');
         } else {
