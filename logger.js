@@ -26,7 +26,7 @@ module.exports = configuration => {
             Object.entries(readings).forEach(readingKvp => {
                 const key = readingKvp[0];
                 const value = readingKvp[1];
-                logDataPoint(key, datetime, JSON.stringify(value));
+                logDataPoint(key, datetime, key === 'rdg' ? value : JSON.stringify(value));
             });
         }
     };
