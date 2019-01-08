@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 module.exports = configuration => {
     let inMemoryData = {}; //This is a dictionary with the series name as the key and a subdictionary (of timestamp/measures) as the value
@@ -12,10 +13,11 @@ module.exports = configuration => {
     
     const persistData = () => {
         const readingKey = Object.keys(inMemoryData)[0];
-        const latestTimestamp = Math.max(...Object.keys(inMemoryData[readingKey]));
+        const latestTimestamp = readingKey ? Math.max(...Object.keys(inMemoryData[readingKey])) : Date.now();
         const dataToPersist = inMemoryData;
         inMemoryData = {};
-        fs.writeFile(`logger-data/data_${latestTimestamp}.json`, JSON.stringify(dataToPersist), 'utf8', ()=>{});
+        const filename = path.join(configuration.LOGGER_DATA_FOLDER, `data_${latestTimestamp}.json`);
+        fs.writeFile(filename, JSON.stringify(dataToPersist), 'utf8', ()=>{});
     };
 
     const storeReadings = readings => {
