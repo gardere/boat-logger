@@ -1,10 +1,12 @@
-# Logger
+# Boat Dashboard - Logger
 
 ## Description
 
 The role of this component is to fetch the latest readings on a set interval and persist them.
 
-It helps to build historical view (GPS route, instruments readings) and replay the data for bench testing.
+It helps building historical views (GPS route, instruments readings) and replay the data for bench testing.
+
+This component runs on the Raspberry Pi and can be disabled without having any notable impact on the rest of the system.
 
 ## Components
 
