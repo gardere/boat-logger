@@ -3,7 +3,7 @@ const http = require('http');
 module.exports = configuration => { 
     const fetch = () => {
         return new Promise((resolve, reject) => {
-            http.get('http://localhost:8081', (resp) => {
+            http.get(configuration.READINGS_HTTP_ENDPOINT, (resp) => {
             let data = '';
             
             resp.on('data', (chunk) => {
@@ -23,5 +23,5 @@ module.exports = configuration => {
 
     return {
         fetch
-    }
+    };
 };
